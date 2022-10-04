@@ -105,14 +105,14 @@ int main(int argc, char *argv[]) {
 
 	if (mode == DECOMPRESS) {
 		if (snappy_uncompress(contents, file_size, output_buffer, &output_length) != SNAPPY_OK) {
-			printf("Failed to decompress data\n");
+			printf("Failed to decompress data (invalid input)\n");
 			exit(1);
 		}
 	}
 
 	if (output == OUTFILE) {
 		if (write_file(outfile, output_buffer, output_length) < 0) exit(1);
-		printf("Written new data to \"%s\", (old: %d, new: %d, net: %d, %.0f%)\n",
+		printf("Written new data to \"%s\", (old: %u, new: %lu, net: %lu, %.0f%%)\n",
 			outfile,
 			file_size,
 			output_length,
